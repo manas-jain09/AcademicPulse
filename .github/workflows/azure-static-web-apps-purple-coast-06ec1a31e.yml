@@ -28,9 +28,17 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-          app_location: "./dist" # App source code path
+          app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
           output_location: "dist" # Built app content directory - optional
+        env:
+          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
+          VITE_EMBEDDING_MODEL: ${{ secrets.VITE_EMBEDDING_MODEL }}
+          VITE_LLM_MODEL: ${{ secrets.VITE_LLM_MODEL }}
+          VITE_LLM_MODEL_QUIZ: ${{ secrets.VITE_LLM_MODEL_QUIZ }}
+          VITE_LLM_MODEL_TTS: ${{ secrets.VITE_LLM_MODEL_TTS }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
           ###### End of Repository/Build Configurations ######
 
   close_pull_request_job:
