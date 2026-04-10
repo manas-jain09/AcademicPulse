@@ -1,17 +1,5 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html"
-  },
-  "routes": [
-    {
-      "route": "/index.html",
-      "rewrite": "/index.html"
-    }
-  ],
-  "responseOverrides": {
-    "404": {
-      "rewrite": "/index.html",
-      "statusCode": 200
-    }
   }
 }
