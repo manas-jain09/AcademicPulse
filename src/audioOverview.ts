@@ -14,6 +14,7 @@ export interface AudioOverviewInput {
   topic?: string
   theme: PodcastTheme
   language: PodcastLanguage
+  model?: string
 }
 
 export interface AudioOverviewResult {

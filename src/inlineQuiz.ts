@@ -2,6 +2,7 @@ import { GoogleGenAI } from '@google/genai'
 
 const API_KEY = import.meta.env.VITE_GEMINI_API_KEY || ''
 const LLM_MODEL = import.meta.env.VITE_LLM_MODEL_QUIZ || 'gemini-2.5-flash'
+// Using this fallback mechanism
 
 if (!API_KEY) {
     console.error('VITE_GEMINI_API_KEY is missing from environment variables.')
