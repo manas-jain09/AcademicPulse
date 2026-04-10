@@ -310,7 +310,7 @@ export async function generateTTSAudio(script: string, language: PodcastLanguage
   const voiceName = VOICE_MAP[language]
 
   const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash-preview-tts',
+    model: import.meta.env.VITE_LLM_MODEL_TTS || 'gemini-2.5-flash-preview-tts',
     contents: script,
     config: {
       responseModalities: ['audio'] as any,

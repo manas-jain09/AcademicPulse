@@ -397,7 +397,7 @@ export function openPaperView(paper: BoardPaper): void {
         if (q.subQuestions && q.subQuestions.length > 0) {
           questionBody += `<div class="pv-subquestions">`
           q.subQuestions.forEach((sq: any) => {
-            questionBody += `<div class="pv-subq"><span class="pv-subq-label">${sq.label}</span> ${sq.text} <span class="pv-marks-sm">[${sq.marks} Mark${sq.marks > 1 ? 's' : ''}]</span></div>`
+            questionBody += `<div class="pv-subq"><span class="pv-subq-label">${escapeHtml(sq.label)}</span> ${escapeHtml(sq.text)} <span class="pv-marks-sm">[${sq.marks} Mark${sq.marks > 1 ? 's' : ''}]</span></div>`
           })
           questionBody += `</div>`
         }
@@ -406,7 +406,7 @@ export function openPaperView(paper: BoardPaper): void {
       else if (q.parts && q.parts.length > 0) {
         questionBody += `<div class="pv-q-num">Q.${q.number} <span class="pv-marks">[${q.marks} Marks]</span></div>`
         if (q.text) {
-          questionBody += `<div class="pv-q-text">${q.text}</div>`
+          questionBody += `<div class="pv-q-text">${escapeHtml(q.text)}</div>`
         }
         questionBody += `<div class="pv-parts">`
         q.parts.forEach((part: any) => {
@@ -541,8 +541,8 @@ export function openPaperView(paper: BoardPaper): void {
     <div class="pv-paper">
       <div class="pv-header">
         <div class="pv-cbse-badge">CBSE Board Examination 2025-26</div>
-        <h1 class="pv-title">${pj.title || paper.paper_name}</h1>
-        <p class="pv-subtitle">Subject Code: ${pj.code || paper.subject_id?.toUpperCase()}</p>
+        <h1 class="pv-title">${escapeHtml(pj.title || paper.paper_name)}</h1>
+        <p class="pv-subtitle">Subject Code: ${escapeHtml(pj.code || paper.subject_id?.toUpperCase())}</p>
         <div class="pv-meta-row">
           <div class="pv-meta-item"><span class="material-symbols-outlined" style="font-size:16px">timer</span> ${pj.duration || '3 hours'}</div>
           <div class="pv-meta-item"><span class="material-symbols-outlined" style="font-size:16px">grade</span> ${pj.totalMarks || 80} Marks</div>
@@ -938,4 +938,8 @@ export function openResultsView(paper: BoardPaper): void {
     newTab.document.write(html)
     newTab.document.close()
   }
+}function escapeHtml(text: string): string {
+  const div = document.createElement('div')
+  div.textContent = text
+  return div.innerHTML
 }

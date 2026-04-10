@@ -986,8 +986,8 @@ async function startApp() {
           <span class="material-symbols-outlined">account_circle</span>
         </div>
         <div class="profile-identity">
-          <h2>${data.name}</h2>
-          <p>${data.email}</p>
+          <h2>${escapeHtml(data.name)}</h2>
+          <p>${escapeHtml(data.email)}</p>
         </div>
       </div>
 
@@ -1538,6 +1538,7 @@ async function startApp() {
         subjectTitle: titleMap[subjectId] || subjectId,
         chapterId: parseInt(chapterOpt.value),
         chapterTitle: chapterOpt.dataset.title || 'Chapter',
+        model: import.meta.env.VITE_LLM_MODEL_TTS || 'gemini-2.5-flash-preview-tts',
         mode: selectedMode,
         topic: selectedMode === 'topic' ? topicInput.value.trim() : undefined,
         theme: selectedTheme,
