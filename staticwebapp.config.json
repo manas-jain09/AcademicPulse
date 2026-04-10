@@ -1,5 +1,12 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html"
-  }
+  },
+  "routes": [
+    {
+      "route": "/",
+      "redirect": "/landing",
+      "statusCode": 302
+    }
+  ]
 }
