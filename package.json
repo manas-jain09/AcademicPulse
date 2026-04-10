@@ -1,0 +1,25 @@
+{
+  "name": "vite-ts-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "build:embeddings": "node scripts/build-embeddings.mjs"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "^6.0.0"
+  },
+  "dependencies": {
+    "@google/genai": "^1.45.0",
+    "@supabase/supabase-js": "^2.101.1",
+    "@types/marked": "^5.0.2",
+    "marked": "^18.0.0",
+    "mermaid": "^11.13.0",
+    "pdfjs-dist": "^5.5.207",
+    "tslib": "^2.8.1"
+  }
+}
