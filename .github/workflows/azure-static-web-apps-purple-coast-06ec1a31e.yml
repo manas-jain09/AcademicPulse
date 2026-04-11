@@ -30,13 +30,14 @@ jobs:
           api_location: "" 
           output_location: "dist" 
         env:
-          VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
-          VITE_EMBEDDING_MODEL: ${{ secrets.VITE_EMBEDDING_MODEL }}
-          VITE_LLM_MODEL: ${{ secrets.VITE_LLM_MODEL }}
-          VITE_LLM_MODEL_QUIZ: ${{ secrets.VITE_LLM_MODEL_QUIZ }}
-          VITE_LLM_MODEL_TTS: ${{ secrets.VITE_LLM_MODEL_TTS }}
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_GEMINI_API_KEY: AIzaSyCJzGeX5Ir2ScldrJyQmZycDCKEsy4oMRk
+          VITE_EMBEDDING_MODEL: gemini-embedding-2-preview
+          VITE_LLM_MODEL: gemini-3.1-flash-preview
+          VITE_LLM_MODEL_QUIZ: gemini-2.5-flash
+          VITE_LLM_MODEL_TTS: gemini-2.5-flash-tts
+          VITE_SUPABASE_URL: https://jpxqzqbutqcsbyxklvcd.supabase.co
+          VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpweHF6cWJ1dHFjc2J5eGtsdmNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNTI2ODksImV4cCI6MjA5MDgyODY4OX0.hPJxb1E2ys0YQPaFQCajE3RmsnDjrMT-jHCnURwePQw
+LLM_MODEL_QUIZ=gemini-2.5-flash
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
