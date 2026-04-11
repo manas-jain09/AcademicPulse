@@ -37,7 +37,6 @@ jobs:
           VITE_LLM_MODEL_TTS: gemini-2.5-flash-tts
           VITE_SUPABASE_URL: https://jpxqzqbutqcsbyxklvcd.supabase.co
           VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpweHF6cWJ1dHFjc2J5eGtsdmNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNTI2ODksImV4cCI6MjA5MDgyODY4OX0.hPJxb1E2ys0YQPaFQCajE3RmsnDjrMT-jHCnURwePQw
-LLM_MODEL_QUIZ=gemini-2.5-flash
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
