@@ -1,11 +1,11 @@
 import { createClient } from '@supabase/supabase-js'
 
-// Supabase credentials hardcoded as requested
-const SUPABASE_URL = 'https://jpxqzqbutqcsbyxklvcd.supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpweHF6cWJ1dHFjc2J5eGtsdmNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNTI2ODksImV4cCI6MjA5MDgyODY4OX0.hPJxb1E2ys0YQPaFQCajE3RmsnDjrMT-jHCnURwePQw'
+// Supabase credentials fetched from environment variables (set via GitHub Secrets)
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || ''
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
 
 if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.error('Supabase credentials missing.')
+    console.error('Supabase credentials missing. Ensure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set.')
 }
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)

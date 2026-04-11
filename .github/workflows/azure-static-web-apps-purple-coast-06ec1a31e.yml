@@ -26,9 +26,18 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/" 
-          api_location: "" 
-          output_location: "dist" 
+          app_location: "/"
+          api_location: ""
+          output_location: "dist"
+          # This tells Oryx which env vars to forward into the build container
+          environment_variables: |
+            VITE_GEMINI_API_KEY
+            VITE_EMBEDDING_MODEL
+            VITE_LLM_MODEL
+            VITE_LLM_MODEL_QUIZ
+            VITE_LLM_MODEL_TTS
+            VITE_SUPABASE_URL
+            VITE_SUPABASE_ANON_KEY
         env:
           VITE_GEMINI_API_KEY: ${{ secrets.VITE_GEMINI_API_KEY }}
           VITE_EMBEDDING_MODEL: ${{ secrets.VITE_EMBEDDING_MODEL }}

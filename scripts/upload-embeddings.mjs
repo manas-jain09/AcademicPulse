@@ -1,13 +1,40 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-const SUPABASE_URL = 'https://jpxqzqbutqcsbyxklvcd.supabase.co'
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpweHF6cWJ1dHFjc2J5eGtsdmNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUyNTI2ODksImV4cCI6MjA5MDgyODY4OX0.hPJxb1E2ys0YQPaFQCajE3RmsnDjrMT-jHCnURwePQw'
+// Read Supabase credentials from environment variables (set via GitHub Secrets or .env)
+const SUPABASE_URL = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || ''
+const SUPABASE_ANON_KEY = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || ''
+
+if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  // Attempt to load from .env file
+  try {
+    const envPath = path.resolve(process.cwd(), '.env')
+    const envRaw = await fs.readFile(envPath, 'utf-8')
+    for (const line of envRaw.split('\n')) {
+      const trimmed = line.trim()
+      if (!trimmed || trimmed.startsWith('#') || !trimmed.includes('=')) continue
+      const [k, ...rest] = trimmed.split('=')
+      const v = rest.join('=').trim()
+      if (!(k in process.env)) {
+        process.env[k] = v
+      }
+    }
+  } catch {
+    // ignore, handled below
+  }
+}
+
+const finalUrl = process.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL || SUPABASE_URL
+const finalKey = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY || SUPABASE_ANON_KEY
+
+if (!finalUrl || !finalKey) {
+  throw new Error('Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your environment or .env file before running upload-embeddings')
+}
 
 async function supabaseFetch(endpoint, method = 'GET', body = null) {
   const headers = {
-    'apikey': SUPABASE_ANON_KEY,
-    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'apikey': finalKey,
+    'Authorization': `Bearer ${finalKey}`,
     'Content-Type': 'application/json',
     'Prefer': 'return=representation'
   }
@@ -17,7 +44,7 @@ async function supabaseFetch(endpoint, method = 'GET', body = null) {
     options.body = JSON.stringify(body)
   }
 
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${endpoint}`, options)
+  const res = await fetch(`${finalUrl}/rest/v1/${endpoint}`, options)
   
   if (!res.ok) {
     const errText = await res.text()
